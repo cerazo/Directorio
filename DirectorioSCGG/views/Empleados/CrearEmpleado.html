@@ -1,0 +1,63 @@
+<div class="jumbotron" ng-controller="addempleadoController">
+    <div class="jumbotron text-center">
+        <p>{{mensaje}}</p>
+    </div>
+    <form class="form_addcargo">
+        <div class="form-group">
+            <label for="">Nombre del Empleado</label>
+            <input type="text" class="form-control" id="" placeholder="Nombre del Empleado" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Apellido del Empleado</label>
+            <input type="text" class="form-control" id="" placeholder="Apellido del Empleado" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Correo del Empleado</label>
+            <input type="email" class="form-control" id="" placeholder="Correo del Empleado" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Telèfono del Empleado</label>
+            <input type="email" class="form-control" id="" placeholder="Telèfono del Empleado" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Foto del Empleado</label>
+            <input type="file" class="form-control" id="" placeholder="Foto del Empleado" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Descripciòn del Empleado</label>
+            <textarea class="form-control" id="" placeholder="Descripciòn del Empleado" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar la secretarìa donde labora</label>
+            <select class="form-control" id="sel1">
+                <option>Secretarìa de Coordinaciòn General de Gobierno</option>
+                <option>Secretarìa de Finanzas</option>
+                <option>Secretarìa de Salud</option>
+                <option>Secretarìa de Educaciòn</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar el departamento donde labora</label>
+            <select class="form-control" id="sel1">
+                <option>Gobierno Digital</option>
+                <option>Modernizaciòn</option>
+                <option>Recursos Humanos</option>
+                <option>Oncae</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar el cargo que desempeña</label>
+            <select class="form-control" id="sel1">
+                <option>Jefe de la unidad de Gobierno Digital</option>
+                <option>Jefe de Recursos Humanos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Creaciòn</label>
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" readonly="true">
+        </div>
+        <button type="button" class="btn btn-success">Crear empleado</button>
+        <button type="button" class="btn btn-danger">Cancelar</button>
+    </form>
+</div>
+

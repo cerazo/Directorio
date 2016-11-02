@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="scggApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Directorio Informatico</title>
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/toastr.min.css">
+    <link rel="stylesheet" href="css/style/customStyle.css">
+    <link rel="stylesheet" href="css/style/mainMenu.css">
+</head>
+<body>
+    <div id="divPrincipal" >
+        <div id="header" >
+            <div id="divMenuPrincipal">
+                <nav class="navbar navbar-default" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img id="imgLogo" src="Image/gd_logo.png" width="180px" height="45px"></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#inst">Instituciones</a></li>
+                            <li><a href="#cargos">Cargos</a></li>
+                            <li><a href="#empleados">Empleados</a></li>
+                            <li><a href="#departamentos">Departamentos</a></li>
+                            <li><a href="#user">Usuarios</a></li>
+                            <li><a href="#rol">Roles</a></li>
+                        </ul>
+                            <!--<li><a data-toggle="modal" data-target="#1">Cargos</a></li>-->
+                        </ul>
+                        <div ng-controller="loginController">
+                            <ul class="nav navbar-nav navbar-right" id="ul-login" >
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown"  aria-haspopup="true"><img src="Image/user.png" id="aImg" width="28" height="28"></a>
+                                    <ul id="login-ul" class="dropdown-menu" >
+                                        <div id="divFormLogin">
+                                            <li>
+                                                <div id="formLogin">
+                                                    <div id="imgLogin">
+                                                        <img src="Image/login.ico" alt="">    
+                                                    </div>
+                                                    <div >
+                                                        <form class="form" ng-submit="iniciarSesion(correo, password)">
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="txtCorreo"><b>Correo</b></label>
+                                                                <input id="txtCorreo" type="email" class="form-control" placeholder="Correo Electronico" required="true" ng-model="correo" ng-show="!logeado">
+                                                                <p ng-show="logeado" class="label label-success"></p>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="txtPassword"><b>Contraseña</b></label>
+                                                                <input id="txtPassword" type="password" class="form-control" placeholder="Contraseña" required="true" ng-model="password" ng-show="!logeado" value="">         
+                                                            </div>
+                                                            <span class="psw" ng-show="!logeado">¿Olvido su <a href="" id="linkResetPass" data-toggle="modal" data-target="#resetPassModal">contraseña?</a></span>
+                                                            <button type="submit" id="btnLogin" class="btn btn-primary btn-block"  ng-show="!logeado">Login</button>
+                                                            <button type="submit" id="btnLogout" class="btn btn-danger btn-block" ng-click="cerrarSesion()" ng-show="logeado">Cerrar Sesion</button> 
+                                                        </form>
+                                                    </div> 
+                                                </div>
+                                            </li>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="modal fade"  role="dialog" aria-labelledby="myModalLabel" tabindex="-1" id="resetPassModal">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                          <h4 class="modal-title">Restablecer Contraseña</h4>
+                                        </div>
+                                        <div class="modal-body" >
+                                            <form class="form-horizontal" name="resetPass">
+                                                <div class="form-group" ng-class="{'has-error': resetPass.correo.$invalid && resetPass.correo.$dirty}">
+                                                    <label for="txtConfirmCorreo" class="col-sm-4 control-label">Correo Electronico</label> 
+                                                    <div class="col-sm-5">
+                                                        <input type="email" class="form-control danger" id="txtConfirmCorreo" placeholder="Correo Electronico" ng-model="correo" required="true" value="" name="correo">    
+                                                    </div>
+                                                </div> 
+                                                <div class="form-group" ng-class="{'has-error': resetPass.pass1.$invalid && resetPass.pass1.$dirty}"> 
+                                                    <label for="txtNewPass" class="col-sm-4 control-label">Nueva Contraseña</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="password" class="form-control" id="txtNewPass" placeholder="Nueva contraseña" ng-model="pass1" required="true" value=""  name="pass1">
+                                                     </div> 
+                                                </div>
+                                                <div class="form-group" ng-class="{'has-error': resetPass.pass2.$invalid && resetPass.pass2.$dirty}"> 
+                                                    <label for="txtConfirmPass" class="col-sm-4 control-label">Confirmar Contraseña</label> 
+                                                    <div class="col-sm-5">
+                                                        <input type="password" class="form-control" id="txtConfirmPass" placeholder="Confirmar Contraseña" ng-model="pass2" required="true" value="" name="pass2"> 
+                                                    </div>
+                                                </div> 
+                                                <button type="submit" class="btn btn-success aling-rigt"  ng-click="resetPassword(correo, pass1, pass2)" >Confirmar</button>
+                                          </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </nav>
+            </div>
+        </div>
+        <ng-view id="viewBody">
+        </ng-view> 
+    </div>
+    <footer>
+        <div id="copyRigth" align="center">
+            <p>Derechos Reservados Gobierno Digital 2016</p>
+        </div>
+    </footer>
+</body>
+<script src="js/public/jquery.min.js"></script>
+<script src="js/public/jquery-2.2.3.intellisense.js"></script>
+<script src="js/public/angular.min.js"></script>
+<script src="js/public/angular-route.js"></script>
+<script src="js/public/bootstrap.min.js"></script>
+<script src="js/public/toastr.min.js"></script>
+<script src="js/utilities/manageDOM.js"></script>
+<script src="js/utilities/UtilToastMessage.js"></script>
+<script src="js/angularControllers/routeController.js"></script>
+<script src="js/appFactories/scggFactory.js"></script>
+<script src="js/appService/scggService.js"></script>
+<script src="js/angularControllers/LoginController.js"></script>
+<script src="js/angularControllers/homeController.js"></script>
+</html>
+

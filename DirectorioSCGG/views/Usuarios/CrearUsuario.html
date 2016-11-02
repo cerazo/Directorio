@@ -1,0 +1,51 @@
+<div class="jumbotron" ng-controller="adduserController">
+    <div class="jumbotron text-center">
+        <p>{{mensaje}}</p>
+    </div>
+    <form class="form_adduser">
+        <div class="form-group">
+            <label for="">Nombre del Usuario</label>
+            <input type="text" class="form-control" id="" placeholder="Nombre del usuario" required="true" ng-model="nombre_user">
+        </div>
+        <div class="form-group">
+            <label for="">Apellido del Usuario</label>
+            <input type="text" class="form-control" id="" placeholder="Apellido del usuario" required="true" ng-model="apellido_user">
+        </div>
+        <div class="form-group">
+            <label for="">Contraseña del Usuario</label>
+            <input type="text" class="form-control" id="" placeholder="Contraseña del usuario" required="true" ng-model="pass_user">
+        </div>
+        <div class="form-group">
+            <label for="">Teléfono del Usuario</label>
+            <input type="tel" class="form-control" id="" placeholder="Telèfono del usuario" required="true" ng-model="tel_user">
+        </div>
+        <div class="form-group">
+            <label for="">Correo del Usuario</label>
+            <input type="email" class="form-control" id="" placeholder="Correo del usuario" required="true" ng-model="email_user">
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar la secretarìa</label>
+            <select class="form-control" id="sel1" ng-model="inst_user">
+                <option>Secretarìa de Coordinaciòn General de Gobierno</option>
+                <option>Secretarìa de Finanzas</option>
+                <option>Secretarìa de Salud</option>
+                <option>Secretarìa de Educaciòn</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar rol para el usuario</label>
+            <select class="form-control" id="sel1" ng-model="rol_user">
+                <option>SuperAdministrador</option>
+                <option>Ediciòn</option>
+                <option>Lectura</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Creaciòn</label>
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" readonly="true">
+        </div>
+        <button type="button" class="btn btn-success">Crear usuario</button>
+        <button type="button" class="btn btn-danger">Cancelar</button>
+    </form>
+</div>
+

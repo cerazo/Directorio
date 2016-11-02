@@ -1,0 +1,35 @@
+<div class="jumbotron" ng-controller="adddepartamentoController">
+    <div class="jumbotron text-center">
+        <p>{{mensaje}}</p>
+    </div>
+    <form class="form_addcargo">
+        <div class="form-group">
+            <label for="">Nombre del Departamento, Divisiòn o Àrea</label>
+            <input type="text" class="form-control" id="" placeholder="Nombre del Departamento, Divisiòn o Àrea" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Telèfono del Departamento, Divisiòn o Àrea</label>
+            <input type="tel" class="form-control" id="" placeholder="Telèfono del Departamento, Divisiòn o Àrea" required="true">
+        </div>
+        <div class="form-group">
+            <label for="">Descripciòn del Departamento, Divisiòn o Àrea</label>
+            <textarea class="form-control" id="" placeholder="Descripciòn del Departamento, Divisiòn o Àrea" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="sel1">Seleccionar la secretarìa</label>
+            <select class="form-control" id="sel1">
+                <option>Secretarìa de Coordinaciòn General de Gobierno</option>
+                <option>Secretarìa de Finanzas</option>
+                <option>Secretarìa de Salud</option>
+                <option>Secretarìa de Educaciòn</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Creaciòn</label>
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" readonly="true">
+        </div>
+        <button type="button" class="btn btn-success">Crear departamento</button>
+        <button type="button" class="btn btn-danger">Cancelar</button>
+    </form>
+</div>
+

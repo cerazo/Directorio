@@ -1,0 +1,39 @@
+<div class="jumbotron" ng-app="scgg" ng-controller="addinstController">
+    <div class="jumbotron text-center">
+        <p>{{mensaje}}</p>
+    </div>
+    <form class="form_inst" ng-cloack name="formaddinst">
+        <div class="form-group" ng-class="{'has-error': formaddinst.nombre_inst.$invalid && formaddinst.nombre_inst.$dirty}">
+            <label for="">Nombre de la Institución</label>
+            <input ng-required="true" type="text" class="form-control" id="nombre_inst" name="nombre_inst" placeholder="Nombre de la institución" required="true" ng-model="nombre_inst" required>
+            <span ng-if="{'has-error': formaddinst.nombre_inst.$invalid && formaddinst.nombre_inst.$dirty}" class="help-block">El campo nombre de la institución es requerido</span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': formaddinst.siglas_inst.$invalid && formaddinst.siglas_inst.$dirty}">
+            <label for="">Siglas de la Institución</label>
+            <input type="text" class="form-control" id="siglas_inst" name="siglas_inst" placeholder="Siglas de la institución" ng-model="siglas_inst" required>
+            <span ng-if="{'has-error': formaddinst.siglas_inst.$invalid && formaddinst.siglas_inst.$dirty}" class="help-block">Las siglas de la institución son requeridas</span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': formaddinst.desc_inst.$invalid && formaddinst.desc_inst.$dirty}">
+            <label for="">Descripción de la Institución</label>
+            <input class="form-control" id="desc_inst" name="desc_inst" placeholder="Descripción de la institución" ng-model="desc_inst" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': formaddinst.tel_inst.$invalid && formaddinst.tel_inst.$dirty}">
+            <label for="">Teléfono de la Institución</label>
+            <input type="tel" class="form-control" id="tel_inst" name="tel_inst" placeholder="Teléfono de la institución" ng-model="tel_inst" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': formaddinst.pag_inst.$invalid && formaddinst.pag_inst.$dirty}">
+            <label for="">Página Web de la Institución</label>
+            <input type="text" class="form-control" id="pag_inst" name="pag_inst" placeholder="Página Web de la institución" ng-model="pag_inst" required>
+        </div>
+        <div class="form-group" ng-class="{'has-error': formaddinst.direccion_inst.$invalid && formaddinst.direccion_inst.$dirty}">
+            <label for="">Dirección de la Institución</label>
+            <input class="form-control" id="direccion_inst" name="direccion_inst" placeholder="Dirección de la institución" ng-model="direccion_inst" required>
+        </div>
+        <div class="form-group">
+            <label for="">Fecha de Creación</label>
+            <input class="form-control" type="date" value="2011-08-19" id="example-date-input" readonly="true" ng-model="datecreate_inst">
+        </div>
+        <input type="submit" class="btn btn-success" ng-click="addinst()" value="Crear institución">
+        <button type="button" class="btn btn-danger" ng-click="back()">Cancelar</button>
+    </form>
+</div>
