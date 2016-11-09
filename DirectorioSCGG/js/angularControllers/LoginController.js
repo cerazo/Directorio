@@ -7,13 +7,13 @@ scggApp.controller('loginController',[ "$scope", "$http", "$location", "scggApi"
 	
 	
 	$scope.logeado = scggFactory.logeado;
-	var url = "";
+	var url = "routes/DirectorioRoute.php?opcion=";
 	//$scope.opcion = '';
 	$scope.iniciarSesion = function(correo, password) {
 
 		if (correo != undefined && password != undefined) {
-			url = "routes/UsuarioRoute.php?opcion=login";
-			scggApi.httpPost(url, {'correo': correo, 'password': password}).then(
+
+			scggApi.httpPost(url + "login", {'correo': correo, 'password': password}).then(
 				function (response) {
 					if (angular.isObject(response.data)) {
 						scggFactory.SetUserObject(response.data);
@@ -34,16 +34,13 @@ scggApp.controller('loginController',[ "$scope", "$http", "$location", "scggApi"
 					}
 				}
 			);
-			
-			correo = "";
-			password = "";
 		}else{
 			UtilToastMessage.warningGeneral("Por favor llene los campos nesesarios.");
 		}
 	};
 
 	$scope.cerrarSesion = function(){
-		//$("#txtPassword").val("");
+		$("#txtPassword").val("");
 		scggFactory.SetUserObject(null);
 		scggFactory.logeado  = false;
 		$scope.logeado = scggFactory.logeado;
@@ -52,7 +49,6 @@ scggApp.controller('loginController',[ "$scope", "$http", "$location", "scggApi"
 	};
 
 	$scope.resetPassword = function (correo, pass1, pass2) {
-		url = 'routes/UsuarioRoute.php?opcion=resetPass';
 		if (correo !== "" && correo !== undefined)
 		{
 			if (pass1 === pass2) 
@@ -62,7 +58,7 @@ scggApp.controller('loginController',[ "$scope", "$http", "$location", "scggApi"
 					function (response) {
 						$scope.usuario = response.data;
 						if (angular.isObject($scope.usuario)){
-							$http.post(url, {'pass1': pass1}).then(
+							$http.post(url + "resetPass", {'pass1': pass1}).then(
 								function (response) {
 									if (response.data === "Ok") {
 										UtilToastMessage.successGeneral("La contraseña a sido reestablecida. Favor Revisar su correo.");

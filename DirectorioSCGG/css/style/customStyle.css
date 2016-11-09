@@ -40,6 +40,10 @@ body {
     border: 1px solid;
 }
 
+.divBuscar{
+    margin-left: 60em;
+}
+
 #divFooter{
     margin-bottom: 10px;
    /*text-align: center;*/
@@ -53,27 +57,27 @@ body {
     margin-top: -10px;
 }
 
-#login-ul{
+.login-ul{
     min-width: 15.625em;
     padding: 0.875em 0.875em 0.875em;
     overflow: hidden;
     background-color: rgba(255,255,255,.8);
 }
 
-#login-dp .bottom{
+/*#login-dp .bottom{
         background-color: inherit;
         border-top:0 none;
-}
+}*/
 
 #ul-login{
-    padding: 0px 10px 0px 0px;
+    padding: 0em 0.625em 0em 0em;
 }
 
 #imagenHome{
-    height: 192.52px;
+    height: 12.033em;
 }
 
-#imgLogin img{
+.imgLogin img{
     height: 8em;
     width: 8em;
     margin-left: 2.9em;
@@ -191,13 +195,17 @@ span.psw {
 }
 
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+@media  (min-width: 300px) {
     span.psw
        display: block;
        float: none;
     }
     .cancelbtn {
        width: 100%;
+    }
+    #login-ul{
+        margin-left: .625em;
+        border-radius: .625em .625em .625em .625em;
     }
 }
 

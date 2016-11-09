@@ -3,16 +3,21 @@
 function appFactories () {
 	var app = this;
 	app.logeado = false;
-	app.correo = '';
+	app.rol;
 	app.UserObejct = new Object();
 	app.Instituciones = new Object();
 
 	app.SetUserObject = function (obj) {
-		return app.UserObejct = obj;
+		app.UserObejct = obj;
+		app.rol = app.UserObejct.IdRol;
 	};
 
 	app.SetInstitucionesObject = function(obj){
-		return app.Instituciones = obj;
+		app.Instituciones = obj;
+	};
+
+	app.GetInstituciones = function(){
+		return app.Instituciones;
 	}
 
 }

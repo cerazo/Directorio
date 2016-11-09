@@ -17,6 +17,6 @@ class InstitucionesVm
     public $PaginaWeb;
     public $Descripcion;
     public $FechaCreacion;
-    public $fechaModificacion;
+    public $FechaModificacion;
     #public $Codigo;
 }

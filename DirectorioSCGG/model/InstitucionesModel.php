@@ -11,7 +11,7 @@
 	class InstitucionesModel extends Conexion
 	{
 		
-		private $_consulta = null;
+		private $_consulta;
         private $_query = "";
         private $_modelDb;
 
@@ -26,7 +26,7 @@
 			try {
 
 				$this->_modelDb->Conectar();
-				$this->_query = "Select * from instituciones where Codigos_IdCodigo = 1";
+				$this->_query = "Select * From instituciones where Codigos_IdCodigo = 1";
 				$this->_consulta = $this->_modelDb->_db->query($this->_query);
 				#$this->_modelDb->Desconectar();
 				return mysqli_fetch_all($this->_consulta, MYSQLI_ASSOC);
@@ -44,11 +44,11 @@
 			try {
 
 				$this->_modelDb->Conectar();
-				$this->_query = "Select IdInstitucion as Id, NombreInstitucion as Nombre, SiglaInstitucion as Siglas, DescripcionInstitucion as Descripcion,
-								DireccionInstitucion as Direccion, FechaCreacion, PaginaWebInstitucion as PaginaWeb, TelefonoInstitucion as Telefono, 
-								Codigos_IdCodigo as Estado 
-								from instituciones 
-								where IdInstitucion = '" . $id . "' and Codigos_IdCodigo = '1'";
+				$this->_query = "Select IdInstitucion as Id, NombreInstitucion as Nombre, SiglaInstitucion as Siglas, DescripcionInstitucion as 
+				                Descripcion, DireccionInstitucion as Direccion, FechaCreacion, PaginaWebInstitucion as PaginaWeb, TelefonoInstitucion as 
+				                Telefono, Codigos_IdCodigo as Estado 
+								From instituciones 
+								Where IdInstitucion = '" . $id . "' and Codigos_IdCodigo = '1'";
 				$this->_consulta = $this->_modelDb->_db->query($this->_query);
 
 				return mysqli_fetch_all($this->_consulta, MYSQLI_ASSOC);
@@ -65,9 +65,9 @@
 				$this->_modelDb->Conectar();
 				$this->_query = "Insert INTO instituciones (NombreInstitucion, SiglaInstitucion, DescripcionInstitucion, TelefonoInstitucion,
 								PaginaWebInstitucion, DireccionInstitucion, FechaCreacion, Codigos_IdCodigo) 
-								VALUES ('".$institucion->Nombre."','". $institucion->Siglas ."','". $institucion->Descripcion."','". $institucion->Telefono ."',
-								'". $institucion->PaginaWeb ."','". $institucion->Direccion ."','". $institucion->FechaCreacion ."','". $institucion->Codigo. "')";
-				$this->_consulta = $this->_db->query($this->_query);
+								VALUES ('".$institucion->Nombre."','". $institucion->Siglas ."','". $institucion->Descripcion."','". $institucion->Telefono
+								."','". $institucion->PaginaWeb ."','". $institucion->Direccion ."','". $institucion->FechaCreacion ."','". $institucion->Estado."')";
+				$this->_consulta = $this->_modelDb->_db->query($this->_query);
 				$this->_modelDb->Desconectar();
 				if (!mysqli_error($this->_consulta)) {
 					return true;
@@ -75,28 +75,34 @@
 					return false;
 				}
 				
-				if ($this->_consulta) {
+				/*if ($this->_consulta) {
 					return true;
 				}else{
 					return false;
-				}
+				}*/
 			} catch (Exception $e) {
 				echo $e;
 			}finally{
-            $this->_modelDb->Desconectar();
-         }  			
+            	$this->_modelDb->Desconectar();
+         	}  			
 		}
 
 		public function EditarInstitucion(InstitucionesVm $institucion)
 		{
 			try {
 				$this->_modelDb->Conectar();
-				$this->_query = "";
+				$this->_query = "Update instituciones set NombreInstitucion = '".$institucion->Nombre."' ,SiglaInstitucion = '". $institucion->Siglas ."' ,DescripcionInstitucion = '". $institucion->Descripcion."' ,TelefonoInstitucion =  '". $institucion->Telefono ."', PaginaWebInstitucion = '". $institucion->PaginaWeb ."' ,DireccionInstitucion = '". $institucion->Direccion ."' ,FechaModificacion = '". $institucion->FechaModificacion ."' ,Codigos_IdCodigo = '". $institucion->Estado."' where IdInstitucion = ". $institucion->IdInstitucion." and Codigos_IdCodigo = 1" ;
+				$this->_consulta = $this->_modelDb->_db->query($this->_query);
+				if ($this->_consulta) {
+					return true;
+				}else {
+					return false;
+				}
 			} catch (Exception $e) {
-				
+				return $e;
 			}finally{
-            $this->_modelDb->Desconectar();
-         }  
+            	$this->_modelDb->Desconectar();
+         	}  
 		}
 
 		public function EliminarInstitucion($id)
@@ -104,8 +110,7 @@
 			try {
 				$this->_modelDb->Conectar();
 				$this->_query = "update instituciones set Codigos_IdCodigo = 2 where IdInstitucion = " . $id;
-				$this->_consulta = $this->_modelDb->_db->query($this->_query);
-				$this->_modelDb->Desconectar(); 
+				$this->_consulta = $this->_modelDb->_db->query($this->_query); 
 				if ($this->_consulta) {
 					return true;
 				}else{

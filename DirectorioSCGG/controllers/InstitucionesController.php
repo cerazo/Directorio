@@ -20,7 +20,6 @@
 		{
 			$this->_institucionesVm = new InstitucionesVm();
 			$this->_institucionesModel = new InstitucionesModel();
-			
 
 		}
 
@@ -71,39 +70,45 @@
 				return $this->_institucionesVm;
 			}
 		}
-
-		public function EliminarInstitucion($id)
+		public function CrearInstitucion($institucion)
 		{
-			return $this->_institucionesModel->EliminarInstitucion($id);
+			date_default_timezone_set("America/Tegucigalpa");
+			$this->_institucionesVm->Nombre = $institucion->data->Nombre;
+			$this->_institucionesVm->Siglas = $institucion->data->Siglas;
+			$this->_institucionesVm->Direccion = $institucion->data->Direccion;
+			$this->_institucionesVm->Telefono = $institucion->data->Telefono;
+			$this->_institucionesVm->Estado = 1;
+			$this->_institucionesVm->PaginaWeb = $institucion->data->PaginaWeb;
+			$this->_institucionesVm->Descripcion = $institucion->data->Descripcion;
+			$this->_institucionesVm->FechaCreacion = date("Y-m-d h:m:s a");
+			//$this->_institucionesVm->Codigo = $institucion->Codigo;
+
+			$inst = $this->_institucionesModel->CrearInstitucion($this->_institucionesVm);
+			return $inst;
 		}
 
 		public function EditarInstitucion($data)
 		{
-			$this->_institucionesVm->Nombre = $data->Nombre;
-			$this->_institucionesVm->Siglas = $data->Siglas;
-			$this->_institucionesVm->Direccion = $data->Direccion;
-			$this->_institucionesVm->Telefono = $data->Telefono;
-			$this->_institucionesVm->Estado = $data->Estado;
-			$this->_institucionesVm->PaginaWeb = $data->PaginaWeb;
-			$this->_institucionesVm->Descripcion = $data->Descripcion;
-			$this->_institucionesVm->FechaCreacion = $data->FechaCreacion;
-			$this->_institucionesVm->Codigo = $data->Codigo;
-			$this->_institucionesModel->EditarInstitucion();
+			date_default_timezone_set("America/Tegucigalpa");
+			$this->_institucionesVm->IdInstitucion = $data->data->IdInstitucion;
+			$this->_institucionesVm->Nombre = $data->data->Nombre;
+			$this->_institucionesVm->Siglas = $data->data->Siglas;
+			$this->_institucionesVm->Direccion = $data->data->Direccion;
+			$this->_institucionesVm->Telefono = $data->data->Telefono;
+			$this->_institucionesVm->Estado = $data->data->Estado;
+			$this->_institucionesVm->PaginaWeb = $data->data->PaginaWeb;
+			$this->_institucionesVm->Descripcion = $data->data->Descripcion;
+			$this->_institucionesVm->FechaModificacion = date("Y-m-d h:m:s a");
+			//$this->_institucionesVm->Codigo = $data->Estado;
+			
+			$inst = $this->_institucionesModel->EditarInstitucion($this->_institucionesVm);
+			return $inst;
 		}
 
-		public function CrearInstitucion($institucion)
+		public function EliminarInstitucion($id)
 		{
-			$this->_institucionesVm->Nombre = $institucion->Nombre;
-			$this->_institucionesVm->Siglas = $institucion->Siglas;
-			$this->_institucionesVm->Direccion = $institucion->Direccion;
-			$this->_institucionesVm->Telefono = $institucion->Telefono;
-			$this->_institucionesVm->Estado = $institucion->Estado;
-			$this->_institucionesVm->PaginaWeb = $institucion->PaginaWeb;
-			$this->_institucionesVm->Descripcion = $institucion->Descripcion;
-			$this->_institucionesVm->FechaCreacion = $institucion->FechaCreacion;
-			$this->_institucionesVm->Codigo = $institucion->Codigo;
-
-			$inst = $this->_institucionesModel->CrearInstitucion($this->_institucionesVm);
+			$resp = $this->_institucionesModel->EliminarInstitucion($id);
+			return $resp;
 		}
 	}
 
