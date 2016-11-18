@@ -6,5 +6,5 @@
  * Time: 11:10 AM
  */
 
-require_once("Views/Shared/_MasterPage.html");
+require_once("views/Shared/_MasterPage.html");
 //require_once("../../views/shared/dashboard.html");

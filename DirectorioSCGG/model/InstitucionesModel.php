@@ -68,18 +68,9 @@
 								VALUES ('".$institucion->Nombre."','". $institucion->Siglas ."','". $institucion->Descripcion."','". $institucion->Telefono
 								."','". $institucion->PaginaWeb ."','". $institucion->Direccion ."','". $institucion->FechaCreacion ."','". $institucion->Estado."')";
 				$this->_consulta = $this->_modelDb->_db->query($this->_query);
-				$this->_modelDb->Desconectar();
-				if (!mysqli_error($this->_consulta)) {
-					return true;
-				}else{
-					return false;
-				}
 				
-				/*if ($this->_consulta) {
-					return true;
-				}else{
-					return false;
-				}*/
+				return $this->_consulta;
+
 			} catch (Exception $e) {
 				echo $e;
 			}finally{
@@ -93,11 +84,7 @@
 				$this->_modelDb->Conectar();
 				$this->_query = "Update instituciones set NombreInstitucion = '".$institucion->Nombre."' ,SiglaInstitucion = '". $institucion->Siglas ."' ,DescripcionInstitucion = '". $institucion->Descripcion."' ,TelefonoInstitucion =  '". $institucion->Telefono ."', PaginaWebInstitucion = '". $institucion->PaginaWeb ."' ,DireccionInstitucion = '". $institucion->Direccion ."' ,FechaModificacion = '". $institucion->FechaModificacion ."' ,Codigos_IdCodigo = '". $institucion->Estado."' where IdInstitucion = ". $institucion->IdInstitucion." and Codigos_IdCodigo = 1" ;
 				$this->_consulta = $this->_modelDb->_db->query($this->_query);
-				if ($this->_consulta) {
-					return true;
-				}else {
-					return false;
-				}
+				return $this->_consulta;
 			} catch (Exception $e) {
 				return $e;
 			}finally{
@@ -111,11 +98,9 @@
 				$this->_modelDb->Conectar();
 				$this->_query = "update instituciones set Codigos_IdCodigo = 2 where IdInstitucion = " . $id;
 				$this->_consulta = $this->_modelDb->_db->query($this->_query); 
-				if ($this->_consulta) {
-					return true;
-				}else{
-					return false;
-				}
+				
+				return $this->_consulta;					
+				
 			} catch (Exception $e) {
 				return $e;
 			}finally{

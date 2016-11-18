@@ -9,7 +9,10 @@ function appFactories () {
 
 	app.SetUserObject = function (obj) {
 		app.UserObejct = obj;
-		app.rol = app.UserObejct.IdRol;
+		if (obj != null) {
+			app.rol = app.UserObejct.IdRol;
+		}
+		
 	};
 
 	app.SetInstitucionesObject = function(obj){

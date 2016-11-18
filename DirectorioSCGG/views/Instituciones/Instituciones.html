@@ -2,7 +2,7 @@
     <div class="container" ng-init="loadInstituciones()">
         <div class="form-group divBuscar" id="divBuscar">
             <!--<label for="txtBuscar" class="col-sm-1 control-label">Buscar:</label>-->
-            <input class="form-control" id="txtBuscar" placeholder="Buscar Institucion" >
+            <input type="text" class="form-control" id="txtBuscar" placeholder="Buscar Institucion" ng-model="search">
         </div>
         <div>
             <table class="table table-hover">
@@ -14,19 +14,19 @@
                         <th>Dirección</th>
                         <th>Teléfono</th>
                         <th>Pagina Web</th>
-                        <th ng-show="scggFactory.rol == 1 || scggFactory.rol == 2 && scggFactory.logeado == true">Acciones</th>
+                        <th ng-show="logeado && rol == 1 || rol == 2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="institucion in instituciones">
+                    <tr ng-repeat="institucion in instituciones | toArray: false | filter:search">
                         <td ng-show="false">{{institucion.Id}}</td>
                         <td>{{institucion.Nombre}}</td>
                         <td>{{institucion.Siglas}}</td>
                         <td>{{institucion.Direccion}}</td>
                         <td>{{institucion.Telefono}}</td>
                         <td>{{institucion.PaginaWeb}}</td>
-                        <td ng-show="scggFactory.rol == 1 || scggFactory.rol == 2 && scggFactory.logeado == true">
-                            <button type="button" class="btn btn-success btn-sm" ng-click="getInstitucion(institucion.Id)" data-toggle="modal" data-target="#EditInst">
+                        <td ng-show="logeado && rol == 1 || rol == 2">
+                            <button type="button" class="btn btn-success btn-sm" ng-click="getInstitucion(institucion.Id)" data-toggle="modal" data-target="#AddInst">
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             </button>
                             <button type="button" class="btn btn-danger btn-sm" ng-click="eliminarInstitucion(institucion.Id)">
@@ -41,60 +41,15 @@
                        
                     </tr>
                 </tfoot>
-            </table>        
-        </div> 
-        <!--<button type="button" class="btn btn-default">-->
-          
-        <!--</button>   -->
-    </div>
-    <div>
-        <a href=""><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditInst" ng-click="SetObject()"><span class="glyphicon glyphicon-plus" aria-hidden="true"> </span> Crear Institución</button></a>
-    </div>
-    <div class="modal fade"  role="dialog" aria-labelledby="myModalLabel" tabindex="-1" id="EditInst">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">{{titulo}}</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="editInstitucion">
-                        <div class="form-group" ng-class="{'has-error': editInstitucion.nombreIntitucion.$invalid && addInstitucion.nombreIntitucion.$dirty}"> 
-                            <label for="txtNombreInstitucion">Nombre</label> 
-                            <input type="text" class="form-control" id="txtNombreInstitucion" placeholder="Nombre de la Institución" ng-model="institucion.Nombre" required name="nombreIntitucion"> 
-                        </div> 
-                        <div class="form-group" ng-class="{'has-error': editInstitucion.siglas.$invalid && addInstitucion.siglas.$dirty}"> 
-                            <label for="txtSiglas">Siglas</label> 
-                            <input type="text" class="form-control" id="txtSiglas" placeholder="Siglas" ng-model="institucion.Siglas" required name="siglas">  
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': editInstitucion.telefono.$invalid && addInstitucion.telefono.$dirty}"> 
-                            <label for="txtTelefono">Telefono</label> 
-                            <input type="text" class="form-control" id="txtTelefono" placeholder="Telefono" ng-model="institucion.Telefono" required name="telefono">  
-                        </div>
-                        <div class="form-group" ng-class="{'has-error': editInstitucion.direccion.$invalid && addInstitucion.direccion.$dirty}"> 
-                            <label for="txtDireccion">Direccion</label> 
-                            <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion" ng-model="institucion.Direccion" required name="direccion">  
-                        </div> 
-                        <div class="form-group" ng-class="{'has-error': editInstitucion.paginaWeb.$invalid && addInstitucion.paginaWeb.$dirty}"> 
-                            <label for="txtPaginaWeb">Pagina Web</label> 
-                            <input type="text" class="form-control" id="txtPaginaWeb" placeholder="Pagina Web" ng-model="institucion.PaginaWeb" required name="paginaWeb">  
-                        </div>
-                        <div class="form-group" > 
-                            <label for="txtDescripcion">Descripcion</label> 
-                            <textarea id="txtDescripcion" class="form-control" ng-model="institucion.Descripcion"></textarea>
-                        </div>
-                        <div class="form-group" ng-show="!crear"> 
-                            <label for="estado">Estado</label> 
-                            <label class="radio-inline"><input type="radio" ng-model="institucion.Estado" name="estado"   ng-value="1">Activar</label>
-                            <label class="radio-inline"><input type="radio" ng-model="institucion.Estado" name="estado"  ng-value="2">Desactivar</label>
-                        </div> 
-                         <button type="submit" class="btn btn-success" data-dismiss="modal" id="btnEditarInstruccion" ng-click="editarIstitucion()" ng-show="!crear">Editar</button> 
-                         <button type="submit" class="btn btn-success" data-dismiss="modal" id="btnCrearInstitucion" ng-click="crearInstitucion()" ng-show="crear">Guardar</button>                                      
-                  </form>
-                </div>
-            </div>
+            </table>   
+            <div>
+                <a href="" ng-show="logeado && rol == 1 || rol == 2"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddInst" ng-click="SetObject()"><span class="glyphicon glyphicon-plus" aria-hidden="true" > </span> Crear Institución</button></a>
+            </div>      
         </div>
-    </div>
+    </div >
+    <div ng-include="'views/PartialViews/AddInstitucion_PartialView.html'" scope="" onload=""></div>
 </div>
+
+    
 
 

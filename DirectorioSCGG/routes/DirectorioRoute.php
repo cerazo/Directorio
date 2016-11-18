@@ -63,6 +63,7 @@
                 case 'deleteInst':
                        if (!empty($data)) {
                            $institucion = $institucionesController->EliminarInstitucion($data->id);
+                           echo $institucion;
                        }
                        break;
                 case 'resetPass':
